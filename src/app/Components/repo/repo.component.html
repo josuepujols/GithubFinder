@@ -1,1 +1,28 @@
-<p>repo works!</p>
+<button (click)="GoHome()" id="back-button" type="button" class="btn btn-primary">Back</button>
+<div class="repos">
+  <div id="repo-header">
+    <img class="img" clas src="{{ImgUrl}}" alt="user logo">
+    <h2><span>{{UserName}}</span></h2>
+  </div>
+</div>
+<div class="repos" id="repo-container">
+  <table id="table-repo" class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre del Repositorio</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Link</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let repo of repos; let i = index;">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{repo.name}}</td>
+        <td>{{repo.description}}</td>
+        <td ><a class="link-repo" href="{{repo.clone_url}}" target="_blank">Repositorio</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

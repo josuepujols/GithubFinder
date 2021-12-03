@@ -42,15 +42,23 @@ body {
 }
 
 #search-img {
-    width: 5.5%;
+    width: 5%;
     position: relative;
     bottom: 48%;
-    left: 96.5%;
+    left: 92.5%;
     cursor: pointer;
     transition: all 400ms;
 }
 #search-img:hover {
     width: 6.5%;
+}
+
+.repos {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin-top: 50px;
 }
 
 .users {
@@ -62,7 +70,7 @@ body {
 }
 
 .container-user {
-    box-shadow: 0px 0px 2.2px #000000;  
+    box-shadow: 0px 0px 2.2px #000000;
     margin: 15px;
     flex-basis: 30%;
     flex-grow: 0;
@@ -111,8 +119,55 @@ body {
     display: flex;
     width: 100%;
     justify-content: center;
+    margin-top: 50px !important;
     margin-bottom: 20px;
 }
+
+#repo-header h2 {
+  font-size: 45px;
+  text-align: center;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
+  font-size: 40px;
+  color: #3039b9;
+  -webkit-transition: all 0.4s ease 0s;
+  -o-transition: all 0.4s ease 0s;
+  transition: all 0.4s ease 0s;
+  font-style: italic;
+}
+
+#number-follow {
+  font-size: 30px !important;
+  font-weight: bold;
+  font-style: italic;
+}
+
+#follower-header {
+  font-size: 20px;
+  color: rgb(177, 61, 61);
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+#repo-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#table-repo {
+  width: 50%;
+}
+
+.link-repo {
+  text-decoration: none;
+}
+
 /* .botones {
     display: flex;
     width: 30%;
@@ -139,14 +194,24 @@ body {
     margin-top: -20px;
 }
 
+#back-button {
+  height: 45px;
+  width: 5%;
+  margin-top: 15px;
+  margin-left: 15px;
+}
+
+/*Table*/
+
+
 @media( max-width:500px  ) {
     #search-container {
         margin-right: 5%;
-    }   
+    }
 
     #search-img {
-        width: 15%;
-        left: 94%;
+        width: 13%;
+        left: 86%;
     }
 
     .container-user {
@@ -157,11 +222,11 @@ body {
 @media( max-width:350px  ) {
     #search-container {
         margin-right: 10%;
-    }   
+    }
 
 
     #search-img {
         width: 20%;
-        left: 94%;
+        left: 80%;
     }
 }

@@ -1,27 +1,34 @@
+<header id="header" *ngIf="!this.IsRepo">
 
-<section id="home">
+	<div id="logo-container">
+		<img id="logo" src="https://logos-marcas.com/wp-content/uploads/2020/11/GitHub-Logo.png" alt="Logo"/>
+	</div>
+</header>
+
+<section *ngIf="!this.IsRepo" id="home">
     <div id="search-container">
         <input (keyup.enter)="get_user()" [(ngModel)]="user" type="text" placeholder="Buscar Usuario"/>
-        <img (click)="get_user()" id="search-img" src="https://cdn.iconscout.com/icon/free/png-256/search-1767866-1502119.png" alt="search"> 
+        <img (click)="get_user()" id="search-img" src="https://cdn.iconscout.com/icon/free/png-256/search-1767866-1502119.png" alt="search">
     </div>
 </section>
 <div id="loader" *ngIf="load && user !== ''">
     Cargando...
 </div>
-<div class="users" *ngIf="total > 0">
+<div class="users" *ngIf="total > 0 && !this.IsRepo">
     <div class="container-user" *ngFor="let user of users;">
         <img class="img" clas src="{{user.avatar_url}}" alt="user logo">
 
         <div class="details">
             <p>{{user.login}}</p>
-            <h5>50 <span>Followers</span></h5>
+            <h5 id="number-follow">{{user.followers_url}} <span *ngIf="user.followers_url >= 100">or more</span></h5>
+            <p id="follower-header">Followers</p>
         </div>
-        
+
         <div class="botones">
-            <a class="link" href="{{user.html_url}}" target="_blank">
+            <a class="link pointer" href="{{user.html_url}}" target="_blank">
                 <img class="github" src="https://image.flaticon.com/icons/png/512/25/25231.png" alt="Github">
             </a>
-            <a class="link" href="#">
+            <a class="link pointer" (click)="GoRepos(user)">
                 <img class="repo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Git_icon.svg/768px-Git_icon.svg.png" alt="Repos">
             </a>
         </div>

@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
     title = 'GitHubFinder';
+
+    public username:string = JSON.parse(sessionStorage.getItem('user') as string);
 }

@@ -14,57 +14,54 @@ export class UserComponent implements OnInit {
 	public load: boolean = false;
 	public users:any[];
 	public total:number = 0;
-	public followers:number[];
+	public followers:number;
+  public IsRepo:boolean;
 
-	constructor( private peticion:RepoServices ) { 
+	constructor( private peticion:RepoServices, private router:Router ) {
 		this.users = [];
-		this.followers = [];
+		this.followers = 0;
+    this.IsRepo = false;
 	}
-	
-	ngOnInit(): void {
-		this.peticion.get_followers().subscribe(
-			response => {
-				this.followers = response;
-				console.log(response);
-			},
-			error => {
 
-			}
-		);
+	ngOnInit(): void {
+    this.IsRepo = false;
 	}
 
 
 	async get_user() {
 		this.load = true;
-		//Llamo al servicio 
+		//Llamo al servicio
 		if (this.user !== "") {
 			await this.peticion.get_user(this.user).subscribe(
 				result => {
 					this.load = false;
 					this.users = result.items;
 					this.total = result.total_count;
-					console.log(this.users);
-					console.log(this.total);
+          this.users.forEach(item => {
+            this.peticion.get_followers(item.followers_url).subscribe(data => {
+              item.followers_url = data.length;
+            });
+          });
 
-					// for (let i = 0; i < this.users.length; i++) {
-					// 	this.peticion.get_followers(this.users[i].login).subscribe(
-					// 		response => {
-					// 			this.followers = response;
-					// 			console.log(response);
-					// 		},
-					// 		error => {
-
-					// 		}
-					// 	);
-					// }
-					
 				},
 				error => {
 					console.log(error);
 				}
-	
+
 			);
 		}
 	}
+
+  GoRepos(user:any) {
+    this.IsRepo = true;
+    this.router.navigate(["/repos"]);
+    const Data = {
+      username: user.login,
+      ImgUrl: user.avatar_url,
+      repos_url: user.repos_url
+    };
+    sessionStorage.setItem('user', JSON.stringify(Data));
+    console.log(user)
+  }
 
 }
